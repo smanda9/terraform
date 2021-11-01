@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.24.0 (4a2a0458)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: infraweb
+  name: infraweb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: infraweb
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.24.0 (4a2a0458)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: infraweb
+    spec:
+      containers:
+        - env:
+            - name: ApiAddress
+              value: http://infraapi:5000/WeatherForecast
+          image: infraweb
+          name: infraweb
+          ports:
+            - containerPort: 5000
+          resources: {}
+      restartPolicy: Always
+status: {}
